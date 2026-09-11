@@ -9,10 +9,11 @@ The implementation combines a React/TypeScript dashboard, Python Lambda handlers
 | Capability | Evidence in this repository |
 | --- | --- |
 | Local analyst experience | Working deterministic browser demo: ten findings from twelve bounded signals, filters, details, notes, status changes and persistence |
-| Backend behavior | 30 offline Python tests cover detection, duplicate delivery, partial failure, authorization, concurrent edits, DynamoDB pagination and notification retries |
+| Backend/deployment behavior | 33 offline Python tests cover detection, duplicate delivery, partial failure, authorization, concurrent edits, DynamoDB pagination, notification retries and the deployment waiter's scoped operation/failure/timeout behavior |
 | Frontend behavior | Seven TypeScript tests cover the analyst workflow; production build checked |
-| Infrastructure | Terraform initializes and validates; live plan/apply evidence must be recorded separately |
-| AWS deployment and CI/CD execution | Defined and ready for integration; do not infer execution from source files. See [testing evidence](docs/testing.md) and any deployment notes added by the integration task |
+| Infrastructure | Terraform initializes/validates; the integration lead completed the live application stack after a retried initial apply |
+| AWS backend integration | Live 15-event bounded smoke passed: ten expected incidents, ten SIMULATED outboxes, unchanged identities after replay, empty observed queues and unauthenticated API 401. See [runtime report](docs/live-smoke-result.json) |
+| Hosted sign-in and CI/CD execution | Independent integration checks; do not infer them from source files or the backend smoke. See [testing evidence](docs/testing.md) and integration notes |
 | Notifications | Disabled by default; real SNS publishes require an explicit deployment setting and authorized destination |
 
 Local demo data is **not evidence of live AWS traffic**. Its fixed timestamp is 15 January 2026, so “threats today” correctly counts zero outside that UTC date.

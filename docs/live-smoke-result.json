@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "startedAt": "2026-09-11T05:56:08.883487+00:00",
+  "mode": "LIVE_AWS_SAFE_SYNTHETIC",
+  "region": "us-east-1",
+  "seed": 1789106168,
+  "accountMatched": true,
+  "nonRootIdentity": true,
+  "expectedIncidents": 10,
+  "plannedEvents": 15,
+  "notificationsRequested": false,
+  "cognitoChanges": false,
+  "submittedEvents": 15,
+  "checks": {
+    "notificationConfiguration": "SIMULATED",
+    "unauthenticatedApiStatus": 401,
+    "createdIncidents": 10,
+    "simulatedOutboxRecords": 10,
+    "replayPreservedIdentitiesAndVersions": true,
+    "replayPreservedSingleOutboxPerIncident": true,
+    "inputQueueApproximateCounts": {
+      "ApproximateNumberOfMessages": 0,
+      "ApproximateNumberOfMessagesNotVisible": 0
+    },
+    "dlqApproximateCounts": {
+      "ApproximateNumberOfMessages": 0,
+      "ApproximateNumberOfMessagesNotVisible": 0
+    }
+  },
+  "status": "PASS",
+  "publishedInitial": 12,
+  "publishedReplay": 3,
+  "finishedAt": "2026-09-11T05:56:26.725686+00:00"
+}

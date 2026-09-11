@@ -9,7 +9,7 @@ The CodePipeline source action uses `CodeStarSourceConnection` (the action provi
 ## Release stages
 
 1. **Source:** GitHub changes produce an immutable source artifact.
-2. **Quality:** CodeBuild installs locked frontend dependencies, Python test/audit dependencies and checksum-verified Terraform; runs the thirty backend and seven frontend tests; type-checks/builds the SPA; audits dependencies; checks explicit source guardrails; and formats/validates Terraform. Any failed command fails the stage.
+2. **Quality:** CodeBuild installs locked frontend dependencies, Python test/audit dependencies and checksum-verified Terraform; runs the thirty-three backend/deployment and seven frontend tests; type-checks/builds the SPA; audits dependencies; checks explicit source guardrails; and formats/validates Terraform. Any failed command fails the stage.
 3. **Review:** A manual CodePipeline approval exposes the concrete built revision before publication. It is an application release control, not a request to repeat previously granted local coding permission.
 4. **Deploy:** A separate scoped CodeBuild role receives only the built artifact, updates the application functions, publishes static content/config and invalidates CloudFront. It has no broad infrastructure or IAM permissions.
 
@@ -27,3 +27,10 @@ A quality failure prevents approval/deployment. A deployment can partially updat
 
 A production extension would add published Lambda versions/aliases, canary traffic shifting, automated rollback alarms, signed artifacts and integration-test gates. Do not describe those as implemented here. No repository file by itself proves the pipeline has executed; record the actual execution outcome separately.
 
+## Verified first deployment failure and correction
+
+The first live pipeline reached Deploy after Source, Quality and Review succeeded. At 05:58:10 UTC on 11 September 2026, CodeBuild failed while waiting for the first Lambda update: the FunctionUpdatedV2 waiter called lambda:GetFunction, which the scoped deploy role did not allow. The earlier code update had succeeded; frontend uploads had not begun, explaining the empty-origin 403.
+
+The correction uses the FunctionUpdated waiter, which polls GetFunctionConfiguration already allowed on the three project functions. It waits up to ninety two-second checks per function and stops on failed/timed-out updates. IAM permissions were not widened. Three offline tests exercise the actual SDK waiter with stubbed AWS responses: in-progress-to-success, failure before the next function, and bounded timeout. See the [AWS waiter reference](https://docs.aws.amazon.com/boto3/latest/reference/services/lambda/waiter/FunctionUpdated.html).
+
+Release this correction through a new source/build artifact. Retrying the old Deploy artifact would still execute its old waiter. A subsequent successful live release must be recorded separately; a local fix alone does not prove that release succeeded.

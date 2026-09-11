@@ -22,3 +22,4 @@
 
 **Destroy fails on a bucket.** S3 versioning retains object versions and delete markers. Inspect and empty the exact project bucket through an explicit reviewed action, then retry. Never substitute recursive deletion across all account buckets.
 
+**First DynamoDB apply reports a KMS key not found.** During this deployment, the initial table-create request returned KMS NotFound; a subsequent key check reported enabled, and the reviewed retry succeeded without reducing encryption. That sequence is consistent with first-use propagation, although the sequence alone does not prove the root cause. Inspect the specific key/service state and failed plan before retrying; do not disable encryption as a blanket workaround.

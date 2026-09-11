@@ -6,7 +6,6 @@ Built an event-driven cloud-security application with Python detection rules, a 
 
 The local demonstration distinguishes synthetic events from AWS traffic. It covers five meaningful signal categories, incident filtering/details, notes, status transitions and safe simulated response guidance. Offline tests exercise duplicate delivery, partial failures, stale writes, pagination and the at-least-once notification failure window.
 
-This summary describes implemented code and local evidence. Add claims of deployed availability, actual pipeline execution or measured cloud performance only after the integration evidence supports them.
+A bounded live AWS smoke test also passed: fifteen safe custom-event submissions produced the ten expected incident/outbox pairs, repeat deliveries preserved incident identity/version, outboxes remained SIMULATED, and the unauthenticated API rejected access. The test completed in approximately eighteen seconds including its polling; this is a single smoke-run duration, not a latency benchmark or service-level objective. Hosted sign-in, full pipeline execution and teardown status require their separate integration records.
 
 Suggested repository description: “AWS security incident workflow: EventBridge/SQS, idempotent Lambda detection, DynamoDB outbox, Cognito React dashboard, Terraform and CodePipeline.”
-

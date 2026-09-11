@@ -5,6 +5,15 @@ import os
 from pathlib import Path
 
 
+def deploy_functions(functions, names, archive, waiter_config=None):
+    # FunctionUpdated polls configuration only, matching the scoped deploy IAM role.
+    # FunctionUpdatedV2 calls GetFunction, which also permits code-download metadata.
+    config = waiter_config or {"Delay": 2, "MaxAttempts": 90}
+    for name in names.values():
+        functions.update_function_code(FunctionName=name, ZipFile=archive)
+        functions.get_waiter("function_updated").wait(FunctionName=name, WaiterConfig=config)
+
+
 def main():
     import boto3
     root = Path(__file__).resolve().parents[1]
@@ -15,9 +24,7 @@ def main():
     (root / "dist" / "config.json").write_text(json.dumps(config), encoding="utf-8")
     functions = boto3.client("lambda")
     archive = (root / "build" / "backend.zip").read_bytes()
-    for name in names.values():
-        functions.update_function_code(FunctionName=name, ZipFile=archive)
-        functions.get_waiter("function_updated_v2").wait(FunctionName=name)
+    deploy_functions(functions, names, archive)
     s3 = boto3.client("s3")
     # Hashed assets first; entry point last. Retain old hashes for rollback/cache safety.
     paths = sorted((root / "dist").rglob("*"), key=lambda p: p.name == "index.html")

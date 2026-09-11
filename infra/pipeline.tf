@@ -131,6 +131,7 @@ resource "aws_iam_role_policy" "deploy" {
   policy = jsonencode({
     Version = "2012-10-17", Statement = [
       {
+        # The deployment helper uses FunctionUpdated, whose poll is GetFunctionConfiguration.
         Effect = "Allow", Action = ["lambda:UpdateFunctionCode", "lambda:GetFunctionConfiguration"], Resource = [for fn in aws_lambda_function.app : fn.arn]
       },
       {
