@@ -29,7 +29,9 @@ function App() {
     let active = true;
     (async () => {
       try {
-        const res = await fetch("/config.json", { cache: "no-store" });
+        const res = await fetch(`${import.meta.env.BASE_URL}config.json`, {
+          cache: "no-store",
+        });
         if (!res.ok) throw new Error("Configuration could not be loaded");
         const c: Config = await res.json();
         if (!["demo", "live"].includes(c.mode))
@@ -122,7 +124,11 @@ function App() {
   return (
     <div className="app">
       <aside className="sidebar">
-        <a className="brand" href="/" aria-label="ThreatLens home">
+        <a
+          className="brand"
+          href={import.meta.env.BASE_URL}
+          aria-label="ThreatLens home"
+        >
           <span className="brand-icon">◇</span>threat<span>lens</span>
         </a>
         <div className="workspace">

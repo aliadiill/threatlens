@@ -11,6 +11,8 @@ Local implementation checks were run on 11 September 2026 UTC.
 | Terraform validate | Passed; provider warns about deprecated DynamoDB hash_key/range_key syntax |
 | Source security guardrail | Passed across backend, TypeScript and Terraform source files |
 | npm dependency audit | Zero vulnerabilities after updating Vitest to 4.1.11 |
+| GitHub Pages local artifact | Passed: seven frontend tests, pages-mode build, explicit demo-only configuration, /threatlens/ assets/config/home base, valid workflow/environment; separate standard AWS build also passed |
+| GitHub Pages hosted deployment | Not established by local artifact checks; add the permanent link only after the integration lead verifies the actual deployment URL |
 | AWS infrastructure | Integration lead completed the application stack; initial DynamoDB creation was retried without changing encryption settings |
 | Live AWS backend smoke | PASS, 05:56:08–05:56:26 UTC: 15 safe custom-event submissions, ten expected incidents and ten SIMULATED outboxes, replay preserved identities/versions, observed queue/DLQ counts zero, unauthenticated API 401 |
 | Hosted sign-in/authenticated browser edits, real SNS delivery, induced DLQ recovery, full pipeline execution, restore | Not established by the backend smoke; integration task must add independent actual evidence |

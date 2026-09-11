@@ -3,6 +3,7 @@ node_modules/
 .pytest_cache/
 .ruff_cache/
 dist/
+dist-pages/
 .env
 .env.*
 !.env.example

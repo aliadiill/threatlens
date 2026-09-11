@@ -91,3 +91,5 @@ The pipeline tests and packages the application, pauses for release review, and 
 - `docs/`: architecture, security, networking, deployment, operations, costs, decisions, evidence and interview material.
 
 See [AWS service choices](docs/aws-services.md), [security](docs/security.md), [monitoring](docs/monitoring.md), [troubleshooting](docs/troubleshooting.md), [cost/teardown](docs/cost.md), [decisions](docs/decisions.md), and [interview preparation](docs/interview-prep.md).
+
+The [build journal](docs/build-journal.md) records the actual implementation and deployment difficulties, their fixes, verification and remaining limits. A separate [GitHub Pages demo workflow](docs/github-pages.md) publishes the browser-only sample at the project base path; its permanent preview link is added only after an actual deployment is verified.
