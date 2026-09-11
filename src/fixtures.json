@@ -1,0 +1,272 @@
+[
+  {
+    "id": "4774f714862c93565439dc12",
+    "eventId": "demo-7-000",
+    "title": "Administrator policy attached",
+    "severity": "HIGH",
+    "category": "privilege-escalation",
+    "resource": "demo-resource-1",
+    "actor": "demo-analyst",
+    "region": "us-east-1",
+    "source": "threatlens.demo",
+    "eventName": "AttachUserPolicy",
+    "createdAt": "2026-01-15T12:00:00Z",
+    "updatedAt": "2026-01-15T12:00:00Z",
+    "status": "OPEN",
+    "version": 1,
+    "simulated": true,
+    "guidance": "Verify change authorization and review the principal's recent activity.",
+    "response": "SIMULATED: investigation checklist prepared; no resource was changed.",
+    "timeline": [
+      {
+        "at": "2026-01-15T12:00:00Z",
+        "kind": "DETECTED",
+        "actor": "demo-detector",
+        "text": "SIMULATED: investigation checklist prepared; no resource was changed."
+      }
+    ]
+  },
+  {
+    "id": "51f0f03fee424f04826ae4b0",
+    "eventId": "demo-7-001",
+    "title": "Administrative port exposed publicly",
+    "severity": "HIGH",
+    "category": "network-exposure",
+    "resource": "demo-resource-2",
+    "actor": "demo-analyst",
+    "region": "us-east-1",
+    "source": "threatlens.demo",
+    "eventName": "AuthorizeSecurityGroupIngress",
+    "createdAt": "2026-01-15T12:01:00Z",
+    "updatedAt": "2026-01-15T12:01:00Z",
+    "status": "OPEN",
+    "version": 1,
+    "simulated": true,
+    "guidance": "Review the security group and narrow administrative access after approval.",
+    "response": "SIMULATED: investigation checklist prepared; no resource was changed.",
+    "timeline": [
+      {
+        "at": "2026-01-15T12:01:00Z",
+        "kind": "DETECTED",
+        "actor": "demo-detector",
+        "text": "SIMULATED: investigation checklist prepared; no resource was changed."
+      }
+    ]
+  },
+  {
+    "id": "db919522c5d5e16f0f8f5f34",
+    "eventId": "demo-7-002",
+    "title": "Failed console sign-in",
+    "severity": "MEDIUM",
+    "category": "authentication",
+    "resource": "demo-resource-3",
+    "actor": "demo-analyst",
+    "region": "us-east-1",
+    "source": "threatlens.demo",
+    "eventName": "ConsoleLogin",
+    "createdAt": "2026-01-15T12:02:00Z",
+    "updatedAt": "2026-01-15T12:02:00Z",
+    "status": "OPEN",
+    "version": 1,
+    "simulated": true,
+    "guidance": "Correlate with other login events; one failure is a signal, not proof of compromise.",
+    "response": "SIMULATED: investigation checklist prepared; no resource was changed.",
+    "timeline": [
+      {
+        "at": "2026-01-15T12:02:00Z",
+        "kind": "DETECTED",
+        "actor": "demo-detector",
+        "text": "SIMULATED: investigation checklist prepared; no resource was changed."
+      }
+    ]
+  },
+  {
+    "id": "9717848d4091645bdf36992a",
+    "eventId": "demo-7-003",
+    "title": "Long-lived access key created",
+    "severity": "MEDIUM",
+    "category": "credential-change",
+    "resource": "demo-resource-4",
+    "actor": "demo-analyst",
+    "region": "us-east-1",
+    "source": "threatlens.demo",
+    "eventName": "CreateAccessKey",
+    "createdAt": "2026-01-15T12:03:00Z",
+    "updatedAt": "2026-01-15T12:03:00Z",
+    "status": "OPEN",
+    "version": 1,
+    "simulated": true,
+    "guidance": "Verify the key is required and prefer temporary credentials.",
+    "response": "SIMULATED: investigation checklist prepared; no resource was changed.",
+    "timeline": [
+      {
+        "at": "2026-01-15T12:03:00Z",
+        "kind": "DETECTED",
+        "actor": "demo-detector",
+        "text": "SIMULATED: investigation checklist prepared; no resource was changed."
+      }
+    ]
+  },
+  {
+    "id": "bc4ef67b1a81fb99e6cbb43c",
+    "eventId": "demo-7-005",
+    "title": "Cloud audit logging was disabled",
+    "severity": "CRITICAL",
+    "category": "audit-evasion",
+    "resource": "demo-resource-2",
+    "actor": "demo-analyst",
+    "region": "us-east-1",
+    "source": "threatlens.demo",
+    "eventName": "StopLogging",
+    "createdAt": "2026-01-15T12:05:00Z",
+    "updatedAt": "2026-01-15T12:05:00Z",
+    "status": "OPEN",
+    "version": 1,
+    "simulated": true,
+    "guidance": "Review CloudTrail configuration and preserve the event for investigation.",
+    "response": "SIMULATED: investigation checklist prepared; no resource was changed.",
+    "timeline": [
+      {
+        "at": "2026-01-15T12:05:00Z",
+        "kind": "DETECTED",
+        "actor": "demo-detector",
+        "text": "SIMULATED: investigation checklist prepared; no resource was changed."
+      }
+    ]
+  },
+  {
+    "id": "3e864141b047d36d95f30468",
+    "eventId": "demo-7-006",
+    "title": "Administrator policy attached",
+    "severity": "HIGH",
+    "category": "privilege-escalation",
+    "resource": "demo-resource-3",
+    "actor": "demo-analyst",
+    "region": "us-east-1",
+    "source": "threatlens.demo",
+    "eventName": "AttachUserPolicy",
+    "createdAt": "2026-01-15T12:06:00Z",
+    "updatedAt": "2026-01-15T12:06:00Z",
+    "status": "OPEN",
+    "version": 1,
+    "simulated": true,
+    "guidance": "Verify change authorization and review the principal's recent activity.",
+    "response": "SIMULATED: investigation checklist prepared; no resource was changed.",
+    "timeline": [
+      {
+        "at": "2026-01-15T12:06:00Z",
+        "kind": "DETECTED",
+        "actor": "demo-detector",
+        "text": "SIMULATED: investigation checklist prepared; no resource was changed."
+      }
+    ]
+  },
+  {
+    "id": "862805082e11b79100faf768",
+    "eventId": "demo-7-007",
+    "title": "Administrative port exposed publicly",
+    "severity": "HIGH",
+    "category": "network-exposure",
+    "resource": "demo-resource-4",
+    "actor": "demo-analyst",
+    "region": "us-east-1",
+    "source": "threatlens.demo",
+    "eventName": "AuthorizeSecurityGroupIngress",
+    "createdAt": "2026-01-15T12:07:00Z",
+    "updatedAt": "2026-01-15T12:07:00Z",
+    "status": "OPEN",
+    "version": 1,
+    "simulated": true,
+    "guidance": "Review the security group and narrow administrative access after approval.",
+    "response": "SIMULATED: investigation checklist prepared; no resource was changed.",
+    "timeline": [
+      {
+        "at": "2026-01-15T12:07:00Z",
+        "kind": "DETECTED",
+        "actor": "demo-detector",
+        "text": "SIMULATED: investigation checklist prepared; no resource was changed."
+      }
+    ]
+  },
+  {
+    "id": "166ad3b9d5d12c684a5594be",
+    "eventId": "demo-7-008",
+    "title": "Failed console sign-in",
+    "severity": "MEDIUM",
+    "category": "authentication",
+    "resource": "demo-resource-1",
+    "actor": "demo-analyst",
+    "region": "us-east-1",
+    "source": "threatlens.demo",
+    "eventName": "ConsoleLogin",
+    "createdAt": "2026-01-15T12:08:00Z",
+    "updatedAt": "2026-01-15T12:08:00Z",
+    "status": "OPEN",
+    "version": 1,
+    "simulated": true,
+    "guidance": "Correlate with other login events; one failure is a signal, not proof of compromise.",
+    "response": "SIMULATED: investigation checklist prepared; no resource was changed.",
+    "timeline": [
+      {
+        "at": "2026-01-15T12:08:00Z",
+        "kind": "DETECTED",
+        "actor": "demo-detector",
+        "text": "SIMULATED: investigation checklist prepared; no resource was changed."
+      }
+    ]
+  },
+  {
+    "id": "c29c61cb9c7dabdcf7198105",
+    "eventId": "demo-7-009",
+    "title": "Long-lived access key created",
+    "severity": "MEDIUM",
+    "category": "credential-change",
+    "resource": "demo-resource-2",
+    "actor": "demo-analyst",
+    "region": "us-east-1",
+    "source": "threatlens.demo",
+    "eventName": "CreateAccessKey",
+    "createdAt": "2026-01-15T12:09:00Z",
+    "updatedAt": "2026-01-15T12:09:00Z",
+    "status": "OPEN",
+    "version": 1,
+    "simulated": true,
+    "guidance": "Verify the key is required and prefer temporary credentials.",
+    "response": "SIMULATED: investigation checklist prepared; no resource was changed.",
+    "timeline": [
+      {
+        "at": "2026-01-15T12:09:00Z",
+        "kind": "DETECTED",
+        "actor": "demo-detector",
+        "text": "SIMULATED: investigation checklist prepared; no resource was changed."
+      }
+    ]
+  },
+  {
+    "id": "9e5584f2c0a8bd16257e9f0a",
+    "eventId": "demo-7-011",
+    "title": "Cloud audit logging was disabled",
+    "severity": "CRITICAL",
+    "category": "audit-evasion",
+    "resource": "demo-resource-4",
+    "actor": "demo-analyst",
+    "region": "us-east-1",
+    "source": "threatlens.demo",
+    "eventName": "StopLogging",
+    "createdAt": "2026-01-15T12:11:00Z",
+    "updatedAt": "2026-01-15T12:11:00Z",
+    "status": "OPEN",
+    "version": 1,
+    "simulated": true,
+    "guidance": "Review CloudTrail configuration and preserve the event for investigation.",
+    "response": "SIMULATED: investigation checklist prepared; no resource was changed.",
+    "timeline": [
+      {
+        "at": "2026-01-15T12:11:00Z",
+        "kind": "DETECTED",
+        "actor": "demo-detector",
+        "text": "SIMULATED: investigation checklist prepared; no resource was changed."
+      }
+    ]
+  }
+]

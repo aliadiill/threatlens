@@ -1,0 +1,31 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      nodejs: 22
+      python: 3.12
+    commands:
+      - npm ci
+      - pip install -r requirements-dev.txt
+      - curl -fsSLO https://releases.hashicorp.com/terraform/1.15.9/terraform_1.15.9_linux_amd64.zip
+      - curl -fsSLO https://releases.hashicorp.com/terraform/1.15.9/terraform_1.15.9_SHA256SUMS
+      - grep 'terraform_1.15.9_linux_amd64.zip$' terraform_1.15.9_SHA256SUMS | sha256sum -c -
+      - unzip -o terraform_1.15.9_linux_amd64.zip -d /usr/local/bin
+  build:
+    commands:
+      - python -m unittest discover -s tests -v
+      - npm test
+      - npm run build
+      - npm audit --audit-level=high
+      - pip-audit -r requirements-dev.txt
+      - python scripts/check_security.py
+      - terraform -chdir=infra fmt -check -recursive
+      - terraform -chdir=infra init -backend=false -input=false
+      - terraform -chdir=infra validate
+      - python scripts/package_backend.py
+artifacts:
+  files:
+    - dist/**/*
+    - build/backend.zip
+    - scripts/deploy_application.py
+    - buildspec-deploy.yml
