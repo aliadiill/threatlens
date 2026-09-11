@@ -38,6 +38,6 @@
 
 ## ADR 007 — Default CloudFront hostname for the bounded demo
 
-**Context:** Buying a domain would violate the goal of spending only existing promotional credits with no incidental purchases.  
+**Context:** I used the provided HTTPS hostname to keep the lab simple and avoid buying a domain for a short demonstration.  
 **Decision:** Use the AWS-provided CloudFront hostname and default certificate. Explicitly retain its actual TLSv1 policy value because AWS ignores a stricter configured minimum for that certificate.  
 **Consequence:** HTTPS works without purchasing a domain, but a strict TLS 1.2 minimum is not enforced. A production domain/certificate/policy upgrade is separate work and must be funded/authorized separately.

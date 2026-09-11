@@ -33,4 +33,10 @@ The first live pipeline reached Deploy after Source, Quality and Review succeede
 
 The correction uses the FunctionUpdated waiter, which polls GetFunctionConfiguration already allowed on the three project functions. It waits up to ninety two-second checks per function and stops on failed/timed-out updates. IAM permissions were not widened. Three offline tests exercise the actual SDK waiter with stubbed AWS responses: in-progress-to-success, failure before the next function, and bounded timeout. See the [AWS waiter reference](https://docs.aws.amazon.com/boto3/latest/reference/services/lambda/waiter/FunctionUpdated.html).
 
-Release this correction through a new source/build artifact. Retrying the old Deploy artifact would still execute its old waiter. A subsequent successful live release must be recorded separately; a local fix alone does not prove that release succeeded.
+The correction was released through a new source/build artifact. Retrying the old Deploy artifact would still have executed its old waiter.
+
+## Verified corrected release
+
+Revision [ecd9440](https://github.com/aliadiill/threatlens/commit/ecd9440e88128d76efaf4a397c1af347c16756d2) completed the actual AWS pipeline on 11 September 2026. Source succeeded at 06:06:18 UTC and Quality at 06:08:56. The reviewer verified this exact source/execution and successful Quality before approving Review at 06:18:43. Deploy succeeded at 06:19:47; its CodeBuild publication command completed successfully.
+
+The redacted [runtime result](pipeline-result.json) records all four stages. The corrected waiter worked without expanding Lambda permissions. No real notification was sent by this verification, and the later Pages/documentation revision was left unapproved for AWS deployment. I subsequently completed the separate [hosted Cognito and persistent-edit checks](live-browser.md).

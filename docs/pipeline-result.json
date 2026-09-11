@@ -1,0 +1,42 @@
+{
+  "checkedAt": "2026-09-11T06:20:23.150926+00:00",
+  "region": "us-east-1",
+  "pipeline": "threatlens-dev",
+  "pipelineExecutionId": "0eeb5c07-01e9-4b82-8be9-23522e3e31f1",
+  "revision": "ecd9440e88128d76efaf4a397c1af347c16756d2",
+  "status": "Succeeded",
+  "identityValidated": true,
+  "stages": [
+    {
+      "stage": "Source",
+      "action": "GitHub",
+      "status": "Succeeded",
+      "startedAt": "2026-09-11T06:06:13.001000+00:00",
+      "updatedAt": "2026-09-11T06:06:18.452000+00:00"
+    },
+    {
+      "stage": "Quality",
+      "action": "TestBuildValidate",
+      "status": "Succeeded",
+      "startedAt": "2026-09-11T06:06:19.058000+00:00",
+      "updatedAt": "2026-09-11T06:08:56.331000+00:00"
+    },
+    {
+      "stage": "Review",
+      "action": "ApproveDeployment",
+      "status": "Succeeded",
+      "startedAt": "2026-09-11T06:08:56.872000+00:00",
+      "updatedAt": "2026-09-11T06:18:43.786000+00:00"
+    },
+    {
+      "stage": "Deploy",
+      "action": "PublishApplication",
+      "status": "Succeeded",
+      "startedAt": "2026-09-11T06:18:44.328000+00:00",
+      "updatedAt": "2026-09-11T06:19:47.596000+00:00"
+    }
+  ],
+  "scope": "Actual application release pipeline; does not establish hosted Cognito sign-in, notification delivery, or restore.",
+  "manualApproval": "Approved only after Quality succeeded for this same source execution.",
+  "notificationsSentByVerification": false
+}

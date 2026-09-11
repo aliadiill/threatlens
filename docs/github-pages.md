@@ -18,7 +18,9 @@ The preparation script explicitly writes a demo configuration with empty API URL
 
 The preview shows fixed synthetic sample data and a visible demo banner. Investigation edits persist in the visitor's browser localStorage only. It does not call AWS APIs, send notifications or prompt for Cognito credentials. Reset demo restores the deterministic fixture.
 
-Local verification on 11 September 2026 passed: seven frontend tests; the Pages build and its artifact checks; YAML parsing and github-pages environment check; and a subsequent standard AWS build. The Pages index references /threatlens/assets/ while the separate AWS index retains /assets/. Hosted Pages publication is still a separate check.
+Local verification on 11 September 2026 passed: seven frontend tests; the Pages build and its artifact checks; YAML parsing and github-pages environment check; and a subsequent standard AWS build. The Pages index references /threatlens/assets/ while the separate AWS index retains /assets/.
+
+The integration lead subsequently verified the hosted [permanent demo](https://aliadiill.github.io/threatlens/) from [workflow run 34569307423](https://github.com/aliadiill/threatlens/actions/runs/34569307423), saved its screenshot and configured About/topics/website/Deployments metadata. See the [actual browser record](live-browser.md).
 
 ## Workflow
 

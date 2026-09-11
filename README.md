@@ -1,8 +1,14 @@
 # ThreatLens
 
+**Built and documented by Ali Adil.**
+
 **Cloud security signals, investigated with context.** ThreatLens turns meaningful AWS activity into a shared incident workspace: classify the risk, inspect the affected resource, document the investigation, and retain the decision history.
 
-The implementation combines a React/TypeScript dashboard, Python Lambda handlers, a transactional DynamoDB incident/outbox model, Terraform, and a GitHub → AWS CodePipeline → CodeBuild release workflow. Responses are deliberately simulated. No handler has permission or code to terminate instances, revoke identities or modify firewall rules.
+[Open the permanent browser demo](https://aliadiill.github.io/threatlens/) — fixed synthetic data, browser-local edits and no AWS sign-in required.
+
+The live AWS stack was deployed, tested and then removed to stop ongoing demo costs. Its authenticated screenshots and runtime results remain as evidence; see [verified teardown](docs/teardown.md).
+
+I combined a React/TypeScript dashboard, Python Lambda handlers, a transactional DynamoDB incident/outbox model, Terraform, and a GitHub → AWS CodePipeline → CodeBuild release workflow. Responses are deliberately simulated. No handler has permission or code to terminate instances, revoke identities or modify firewall rules.
 
 ## Current evidence
 
@@ -13,7 +19,10 @@ The implementation combines a React/TypeScript dashboard, Python Lambda handlers
 | Frontend behavior | Seven TypeScript tests cover the analyst workflow; production build checked |
 | Infrastructure | Terraform initializes/validates; the integration lead completed the live application stack after a retried initial apply |
 | AWS backend integration | Live 15-event bounded smoke passed: ten expected incidents, ten SIMULATED outboxes, unchanged identities after replay, empty observed queues and unauthenticated API 401. See [runtime report](docs/live-smoke-result.json) |
-| Hosted sign-in and CI/CD execution | Independent integration checks; do not infer them from source files or the backend smoke. See [testing evidence](docs/testing.md) and integration notes |
+| AWS CI/CD execution | Source → Quality → Review → Deploy all succeeded for revision ecd9440 on 11 September 2026; deployment completed 06:19:47 UTC. See [pipeline runtime report](docs/pipeline-result.json) |
+| Hosted sign-in and persistent investigation | Verified Cognito PKCE sign-in with required TOTP, ten AWS incidents, OPEN → INVESTIGATING plus note, persistence after API refresh/reopen, and sign-out clearing the dashboard. See [actual browser evidence](docs/live-browser.md) |
+| Permanent demo | [GitHub Pages](https://aliadiill.github.io/threatlens/) verified from workflow run 34569307423; visibly labeled browser-only sample |
+| AWS teardown | 75 managed resources removed; 38 direct absence checks and one scheduled KMS deletion confirmed. The automatic DynamoDB SYSTEM backup expires at no additional cost. See [teardown evidence](docs/teardown.md) |
 | Notifications | Disabled by default; real SNS publishes require an explicit deployment setting and authorized destination |
 
 Local demo data is **not evidence of live AWS traffic**. Its fixed timestamp is 15 January 2026, so “threats today” correctly counts zero outside that UTC date.
@@ -40,6 +49,12 @@ flowchart LR
 ```
 
 Full flows, the data model and reliability boundaries are in [architecture](docs/architecture.md).
+
+## Actual AWS browser check
+
+The hosted application loaded the ten synthetic AWS incidents after Cognito authentication. A saved status/note persisted after closing, refreshing from the API and reopening the incident. The [step-by-step browser record](docs/live-browser.md) includes the investigation and saved-note screenshots, sign-out result and permanent demo verification.
+
+![ThreatLens authenticated AWS dashboard with synthetic incidents](docs/screenshots/threatlens-aws-authenticated.png)
 
 ## Actual local screenshots
 
@@ -92,4 +107,8 @@ The pipeline tests and packages the application, pauses for release review, and 
 
 See [AWS service choices](docs/aws-services.md), [security](docs/security.md), [monitoring](docs/monitoring.md), [troubleshooting](docs/troubleshooting.md), [cost/teardown](docs/cost.md), [decisions](docs/decisions.md), and [interview preparation](docs/interview-prep.md).
 
-The [build journal](docs/build-journal.md) records the actual implementation and deployment difficulties, their fixes, verification and remaining limits. A separate [GitHub Pages demo workflow](docs/github-pages.md) publishes the browser-only sample at the project base path; its permanent preview link is added only after an actual deployment is verified.
+The [build journal](docs/build-journal.md) records the actual implementation and deployment difficulties, their fixes, verification and remaining limits. A separate [GitHub Pages demo workflow](docs/github-pages.md) publishes the verified browser-only sample at the project base path.
+
+## Portfolio cost report
+
+I consolidated my planning choices, AWS-reported charges and credit balance in [my cost report](docs/cost-report.md). I keep estimates separate from posted billing and verify teardown independently.

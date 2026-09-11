@@ -1,8 +1,8 @@
 # ThreatLens build journal: difficulties, fixes and evidence
 
-This journal records problems encountered while building and integrating ThreatLens on 11 September 2026 UTC. It distinguishes executed failures, code-review findings, observed service behavior and remaining work. It is not a manufactured list of production incidents.
+I recorded the problems I encountered while building and integrating ThreatLens on 11 September 2026 UTC. It distinguishes executed failures, code-review findings, observed service behavior and remaining work. These are development and integration findings from my lab, not incidents from a production employer.
 
-The project boundary remained constant: safe synthetic demonstrations, no destructive response calls, notifications disabled, a shared learning SOC, and no personal charges. The user permits at most USD 100 in **total promotional credits across the portfolio**, not monthly spend. Keeping the account's Free plan and removing billable demos after tests remain deployment responsibilities.
+I built a shared learning SOC with synthetic events, simulated responses and notifications disabled. I aimed for a **one-time $100 AWS credit budget across the portfolio**. Short test runs and verified teardown let me demonstrate the architecture without leaving a billable lab running.
 
 ## 1. Serverless correctness needed more than a happy-path demo
 
@@ -64,7 +64,7 @@ The project boundary remained constant: safe synthetic demonstrations, no destru
 
 **Observed integration dependency.** The integration lead verified the temporary AWS CLI profile and identified that its SDK login credential path required the AWS Common Runtime package.
 
-**Fix.** The lead installed awscrt 0.36.3 into the shared local dependency directory. The smoke process used the verified temporary profile with readable boto3/CRT dependencies.
+**Fix.** I installed awscrt 0.36.3 into the shared local dependency directory. The smoke process used the verified temporary profile with readable boto3/CRT dependencies.
 
 **Verification.** STS matched the expected account/non-root identity and the live backend smoke completed. No access keys, refresh tokens, credential files or personal email addresses are reproduced in the repository.
 
@@ -118,7 +118,7 @@ The project boundary remained constant: safe synthetic demonstrations, no destru
 
 **Verification.** Three tests use the actual botocore waiter with stubbed responses: in-progress-to-success through configuration reads, stop before the next function on failure, and bounded timeout. The full thirty-three-test Python suite and Terraform format check passed.
 
-**Release requirement.** A new source/build artifact must contain the correction; retrying the old Deploy artifact repeats its old script. The corrected live release and hosted-browser acceptance are recorded separately when the integration lead verifies them. See [CI/CD](ci-cd.md) and the [official waiter reference](https://docs.aws.amazon.com/boto3/latest/reference/services/lambda/waiter/FunctionUpdated.html).
+**Actual corrected release.** A new source/build artifact containing the fix, revision ecd9440, passed Quality. Review was approved only after verifying this exact execution, and Deploy succeeded at 06:19:47 UTC. The publication log confirmed successful completion; Lambda permissions were not expanded. [pipeline-result.json](pipeline-result.json) records the actual stage outcomes. Retrying the old Deploy artifact would have repeated its old script. I subsequently verified hosted Cognito authentication and a persisted edit in the [browser acceptance record](live-browser.md). See [CI/CD](ci-cd.md) and the [official waiter reference](https://docs.aws.amazon.com/boto3/latest/reference/services/lambda/waiter/FunctionUpdated.html).
 
 ## 13. A lasting public demo needs a different base path and data boundary
 
@@ -126,12 +126,22 @@ The project boundary remained constant: safe synthetic demonstrations, no destru
 
 **Implementation.** A separate Pages mode builds to dist-pages/ at /threatlens/. Configuration loading and the home link use Vite's base URL. The build helper overwrites the Pages artifact with demo mode and empty API/Cognito settings. The GitHub Pages workflow uses the official configure-pages, upload-pages-artifact and deploy-pages actions with the github-pages deployment environment.
 
-**Separation.** AWS builds continue to use dist/ and the root path. Pages does not replace CodePipeline, authenticate against AWS or represent a live security feed. The environment URL will become a README preview link only after an actual Pages deployment is verified.
+**Separation.** AWS builds continue to use dist/ and the root path. Pages does not replace CodePipeline, authenticate against AWS or represent a live security feed. Its verified environment URL is the permanent README preview link.
 
-**Verification.** Seven frontend tests, the local Pages build/base/config checks, workflow YAML/environment checks and the separate AWS root-base build passed. Hosted Pages availability and its final URL are separate integration evidence.
+**Verification.** Seven frontend tests, the local Pages build/base/config checks, workflow YAML/environment checks and the separate AWS root-base build passed. I then verified https://aliadiill.github.io/threatlens/ from workflow run 34569307423, captured the actual demo and set repository About/topics/website/Deployments metadata. See [the hosted evidence](live-browser.md).
+
+## 14. Hosted authentication and persistence required an actual browser check
+
+**Acceptance boundary.** A 401 response and a passing deploy job do not prove that the OAuth redirect, mandatory MFA and an analyst edit work together.
+
+**Executed check.** I provisioned a temporary Cognito analyst with message suppression, completed authorization-code/PKCE sign-in and required TOTP enrollment, and loaded ten synthetic incidents from AWS. The critical incident's state changed OPEN → INVESTIGATING with a note. Closing, refreshing from the API and reopening showed the saved timeline. Sign-out cleared incidents to zero and disabled Refresh.
+
+**Evidence and privacy.** The [step-by-step browser record](live-browser.md) includes actual authenticated, investigation and saved-note captures. No password, authorization code, access token or TOTP secret is published. The temporary identity is part of this application's user pool and is removed with the learning stack.
 
 ## Current evidence boundary
 
-Implemented and checked locally: detection/API/outbox logic, thirty-three Python tests, seven frontend tests, builds, dependency audit and Terraform validation. Verified live: the bounded AWS backend smoke with synthetic signals and API unauthenticated rejection. Actual local screenshots were captured, including a saved investigation note.
+The final operational step removed the temporary AWS stack after acceptance. The saved plan contained 75 deletions and no shared connection/state resources. Pending Review was stopped; six artifact and four frontend versions were removed only from the owned buckets. Terraform completed all deletions, and 39 independent checks found 38 resources absent plus the key pending deletion. A free automatic SYSTEM backup retained by DynamoDB is explicitly recorded. See [the teardown sequence and remaining expiry dates](teardown.md).
 
-Do not infer completed hosted MFA sign-in, authenticated live note editing, successful corrected deployment, induced DLQ recovery, real SNS delivery, restore testing, Pages publication or teardown from code or this journal alone. The integration lead maintains those actual deployment outcomes. Real notifications remained disabled throughout this work.
+Implemented and checked locally: detection/API/outbox logic, thirty-three Python tests, seven frontend tests, builds, dependency audit and Terraform validation. Verified live: the bounded AWS backend smoke, corrected four-stage pipeline at revision ecd9440, Cognito MFA/PKCE authentication, a persistent analyst edit and sign-out. The GitHub Pages sample is verified separately. Actual local and AWS screenshots are labeled by their data source.
+
+Induced DLQ recovery, real SNS delivery and restore testing were not performed. Teardown has its own AWS verification record. Real notifications remained disabled throughout this work.

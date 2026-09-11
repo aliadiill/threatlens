@@ -1,0 +1,207 @@
+{
+  "checkedAt": "2026-09-11T06:34:09.374710+00:00",
+  "region": "us-east-1",
+  "scope": "Only resources from the reviewed ThreatLens Terraform destroy plan; not an account-wide cleanup audit.",
+  "plannedManagedDeletes": 75,
+  "remainingManagedStateResources": 0,
+  "directServiceChecks": [
+    {
+      "resource": "aws_apigatewayv2_api.api",
+      "status": "ABSENT",
+      "serviceCode": "NotFoundException"
+    },
+    {
+      "resource": "aws_cloudfront_distribution.frontend",
+      "status": "ABSENT",
+      "serviceCode": "NoSuchDistribution"
+    },
+    {
+      "resource": "aws_cloudfront_origin_access_control.frontend",
+      "status": "ABSENT",
+      "serviceCode": "NoSuchOriginAccessControl"
+    },
+    {
+      "resource": "aws_cloudfront_response_headers_policy.security",
+      "status": "ABSENT",
+      "serviceCode": "NoSuchResponseHeadersPolicy"
+    },
+    {
+      "resource": "aws_cloudwatch_event_bus.security",
+      "status": "ABSENT",
+      "serviceCode": "ResourceNotFoundException"
+    },
+    {
+      "resource": "aws_cloudwatch_log_group.api",
+      "status": "ABSENT"
+    },
+    {
+      "resource": "aws_cloudwatch_log_group.build[0]",
+      "status": "ABSENT"
+    },
+    {
+      "resource": "aws_cloudwatch_log_group.lambda[\"api\"]",
+      "status": "ABSENT"
+    },
+    {
+      "resource": "aws_cloudwatch_log_group.lambda[\"notifier\"]",
+      "status": "ABSENT"
+    },
+    {
+      "resource": "aws_cloudwatch_log_group.lambda[\"processor\"]",
+      "status": "ABSENT"
+    },
+    {
+      "resource": "aws_cloudwatch_metric_alarm.dlq[\"ingest\"]",
+      "status": "ABSENT"
+    },
+    {
+      "resource": "aws_cloudwatch_metric_alarm.dlq[\"notification\"]",
+      "status": "ABSENT"
+    },
+    {
+      "resource": "aws_cloudwatch_metric_alarm.errors[\"api\"]",
+      "status": "ABSENT"
+    },
+    {
+      "resource": "aws_cloudwatch_metric_alarm.errors[\"notifier\"]",
+      "status": "ABSENT"
+    },
+    {
+      "resource": "aws_cloudwatch_metric_alarm.errors[\"processor\"]",
+      "status": "ABSENT"
+    },
+    {
+      "resource": "aws_cloudwatch_metric_alarm.queue_age",
+      "status": "ABSENT"
+    },
+    {
+      "resource": "aws_codebuild_project.app[\"deploy\"]",
+      "status": "ABSENT"
+    },
+    {
+      "resource": "aws_codebuild_project.app[\"test\"]",
+      "status": "ABSENT"
+    },
+    {
+      "resource": "aws_codepipeline.app[0]",
+      "status": "ABSENT",
+      "serviceCode": "PipelineNotFoundException"
+    },
+    {
+      "resource": "aws_cognito_user_pool.analysts",
+      "status": "ABSENT",
+      "serviceCode": "ResourceNotFoundException"
+    },
+    {
+      "resource": "aws_dynamodb_table.incidents",
+      "status": "ABSENT",
+      "serviceCode": "ResourceNotFoundException"
+    },
+    {
+      "resource": "aws_iam_role.build[\"deploy\"]",
+      "status": "ABSENT",
+      "serviceCode": "NoSuchEntity"
+    },
+    {
+      "resource": "aws_iam_role.build[\"test\"]",
+      "status": "ABSENT",
+      "serviceCode": "NoSuchEntity"
+    },
+    {
+      "resource": "aws_iam_role.lambda[\"api\"]",
+      "status": "ABSENT",
+      "serviceCode": "NoSuchEntity"
+    },
+    {
+      "resource": "aws_iam_role.lambda[\"notifier\"]",
+      "status": "ABSENT",
+      "serviceCode": "NoSuchEntity"
+    },
+    {
+      "resource": "aws_iam_role.lambda[\"processor\"]",
+      "status": "ABSENT",
+      "serviceCode": "NoSuchEntity"
+    },
+    {
+      "resource": "aws_iam_role.pipeline[0]",
+      "status": "ABSENT",
+      "serviceCode": "NoSuchEntity"
+    },
+    {
+      "resource": "aws_kms_key.notifications",
+      "status": "SCHEDULED_DELETION",
+      "keyState": "PendingDeletion",
+      "deletionDate": "2026-09-18T06:30:18.024000+00:00"
+    },
+    {
+      "resource": "aws_lambda_event_source_mapping.outbox",
+      "status": "ABSENT",
+      "serviceCode": "ResourceNotFoundException"
+    },
+    {
+      "resource": "aws_lambda_event_source_mapping.queue",
+      "status": "ABSENT",
+      "serviceCode": "ResourceNotFoundException"
+    },
+    {
+      "resource": "aws_lambda_function.app[\"api\"]",
+      "status": "ABSENT",
+      "serviceCode": "ResourceNotFoundException"
+    },
+    {
+      "resource": "aws_lambda_function.app[\"notifier\"]",
+      "status": "ABSENT",
+      "serviceCode": "ResourceNotFoundException"
+    },
+    {
+      "resource": "aws_lambda_function.app[\"processor\"]",
+      "status": "ABSENT",
+      "serviceCode": "ResourceNotFoundException"
+    },
+    {
+      "resource": "aws_s3_bucket.artifacts[0]",
+      "status": "ABSENT",
+      "serviceCode": "404"
+    },
+    {
+      "resource": "aws_s3_bucket.frontend",
+      "status": "ABSENT",
+      "serviceCode": "404"
+    },
+    {
+      "resource": "aws_sns_topic.incidents",
+      "status": "ABSENT",
+      "serviceCode": "NotFound"
+    },
+    {
+      "resource": "aws_sqs_queue.dlq",
+      "status": "ABSENT",
+      "serviceCode": "AWS.SimpleQueueService.NonExistentQueue"
+    },
+    {
+      "resource": "aws_sqs_queue.events",
+      "status": "ABSENT",
+      "serviceCode": "AWS.SimpleQueueService.NonExistentQueue"
+    },
+    {
+      "resource": "aws_sqs_queue.notification_failures",
+      "status": "ABSENT",
+      "serviceCode": "AWS.SimpleQueueService.NonExistentQueue"
+    }
+  ],
+  "tableBackupMetadata": [
+    {
+      "type": "SYSTEM",
+      "status": "AVAILABLE",
+      "createdAt": "2026-09-11T06:30:18.612000+00:00",
+      "expiresAt": "2026-09-18T06:30:18.612000+00:00"
+    }
+  ],
+  "preserved": [
+    "GitHub repository",
+    "GitHub Pages browser demo",
+    "private Terraform state/evidence",
+    "shared CodeConnections connection"
+  ],
+  "status": "PASS"
+}

@@ -1,5 +1,7 @@
 # Deployment and teardown procedure
 
+The recorded learning deployment completed its live tests and was removed. See [actual browser acceptance](live-browser.md) and [verified teardown](teardown.md). The following procedure is for an intentional future deployment.
+
 ## Prerequisites and review
 
 Use a verified non-root role with temporary credentials. Confirm the intended account and region, account plan/service eligibility and Lambda quota. This repository defaults to no real notification, no CloudTrail input and no pipeline. The integration task can enable them explicitly.
@@ -44,7 +46,7 @@ The helper uploads the three Lambda packages, waits for function updates, writes
 
 ## Provision an analyst and exercise the live path
 
-Create an analyst in the Cognito pool using the administrator console or a scoped temporary role; use the user's authorized email. Do not put a password into repository configuration. Complete first sign-in, password change and TOTP enrollment in the hosted UI. Then:
+Create an analyst in the Cognito pool using the administrator console or a scoped temporary role; use an email address that I control. Do not put a password into repository configuration. Complete first sign-in, password change and TOTP enrollment in the hosted UI. Then:
 
 1. Confirm an unauthenticated API request returns 401.
 2. Publish at most twelve custom demo events with `python scripts/generate_events.py --send --count 12 --seed 7 --bus BUS_NAME`.
@@ -63,4 +65,3 @@ Disable pipeline/event generation, stop upstream forwarding, and decide whether 
 Destroy the reviewed application stack, wait for CloudFront disable/delete completion, and verify queues, database, functions, buckets, alarms, pipeline and build projects are gone. The KMS key enters a seven-day pending-deletion period. Cognito users are removed with the application pool. Preserve the separate state backend and any shared CodeConnections resource; this stack does not own the supplied connection.
 
 Cost reconciliation can lag. Check billed service/region usage after removal rather than treating a successful destroy command as proof that no account cost remains.
-
