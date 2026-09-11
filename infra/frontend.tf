@@ -126,7 +126,7 @@ resource "aws_cloudfront_distribution" "frontend" {
   }
   viewer_certificate {
     cloudfront_default_certificate = true
-    minimum_protocol_version       = "TLSv1.2_2021"
+    minimum_protocol_version       = "TLSv1"
 
   }
 
